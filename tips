@@ -1,0 +1,23 @@
+map <pair<int, int>, int> mp;
+pair <int, int> temp = {3, 5};
+value = 2332;
+mp[temp] = value;
+
+
+(3, 5) -> 2332
+
+
+
+pair <int, int> p;
+vector <int> v(2);
+v[0] -> p.first;
+
+
+two kinds of maps
+map<pair<int, int>, int> mp;
+map<vector<int>, int>> mp2;
+
+first kind of pairs of triples -> b1 != c1 (others are same)
+go through the array, looking at each triple
+look at the second and third element of the current triple
+put it in a map

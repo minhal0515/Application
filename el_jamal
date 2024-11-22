@@ -1,0 +1,60 @@
+import random
+from sympy import mod_inverse
+
+def generate_keys():
+    # Step 1: Choose a large prime number p
+    p = 23
+    
+    # Step 2: Choose a primitive root g of p
+    g = 5
+    
+    # Step 3: Choose a private key a
+    a = random.randint(2, p-2)
+    
+    # Step 4: Calculate public key A = g^a mod p
+    A = pow(g, a, p)
+    
+    return (p, g, a), A
+
+def encrypt(message, public_key):
+    p, g, A = public_key
+    
+    # Step 1: Choose a random integer k
+    k = random.randint(2, p-2)
+    
+    # Step 2: Calculate c1 = g^k mod p
+    c1 = pow(g, k, p)
+    
+    # Step 3: Calculate c2 = (message * A^k) mod p
+    c2 = (message * pow(A, k, p)) % p
+    
+    return c1, c2
+
+def decrypt(ciphertext, private_key):
+    p, a = private_key
+    c1, c2 = ciphertext
+    
+    # Step 1: Calculate s = c1^a mod p
+    s = pow(c1, a, p)
+    
+    # Step 2: Calculate the modular inverse of s
+    s_inverse = mod_inverse(s, p)
+    
+    # Step 3: Calculate the plaintext message m = (c2 * s_inverse) mod p
+    message = (c2 * s_inverse) % p
+    
+    return message
+
+# Generate keys
+private_key, public_key = generate_keys()
+print("Private key:", private_key)
+print("Public key:", public_key)
+
+# Encrypt
+message = 9
+ciphertext = encrypt(message, public_key)
+print("Ciphertext:", ciphertext)
+
+# Decrypt
+decrypted_message = decrypt(ciphertext, private_key)
+print("Decrypted message:", decrypted_message)
