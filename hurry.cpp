@@ -20,22 +20,14 @@ void solve([[maybe_unused]] int test) {
     int j = 1;
     int f = 0;
     int x = 0;
-    while(j<=n){
-        j++;
-        x++;   
-        cout<<"cum";     
-        if(j==v[x]){
-            continue;
-        }
-        else if(v[x]==j+1 && j==v[x+1]){
-            continue;
-        }
-        else if(j-1==v[x] && j==v[x-1]){
-            continue;
-        }
-        else{
-            f=1;
-            break;
+    for(int i=0;i<n-1;i++){
+        if(v[i] !=i+1){
+            if(v[i+1]==i+1 && v[i]==i+2){
+                swap(v[i],v[i+1]);
+            }
+            else{
+                f=1;
+            }
         }
     }
     
