@@ -4,26 +4,33 @@
 using namespace std;
 #define int long long
 int32_t main(){
-	int n;
-	cin>>n;
-	vector<int> v(n);
-	//for(int i=0;i<n;i++){
-		for(int i=0;i<n;i++){
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++){
+		int n;
+		cin>>n;
+		vector<int> v(n+1);
+		for(int i=1;i<=n;i++){
 			cin>>v[i];
 		}
-		vector <int> v1(n);
-		for(int i=0;i<n;i++){
-			v1[v[i]-1]=i+1;
-		}
-		// for(int i=0;i<n;i++){
-		// 	cout<<v1[i];
-		// }
-		int ans=1;
-		for(int i=0;i<n-1;i++){
-			if(v1[i]>v1[i+1]){
-				ans++;
+		int c=1;
+		vector <int> ans(n+1, 0);
+		ans[1]=c;
+		for(int i=2;i<=n;i++){
+			int d=v[i]-v[i-1];
+			int p=i-d;
+			if(p==0){
+				c++;
+				ans[i]=c;
+			} else{
+				ans[i]=ans[p];
 			}
 		}
-		cout<<ans<<'\n';
+//		cout<<c;
+		for(int i=1;i<=n;i++){
+			cout<<ans[i]<<' ';
+		}
+		cout<<'\n';
+	}
 	
 }
