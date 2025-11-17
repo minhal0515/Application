@@ -2,30 +2,27 @@
 using namespace std;
 #define int long long
 
-int expo(int b, int e, int m){
-	int res=1;
-	b%=m;
-	while(e>0){
-		if(e&1){
-			res=(res*b)%m;
 
-		}
-		b=(b*b)%m;
-		e>>=1;
-	}	
-	return res;
-}
 
 int32_t main(){
 	int t;
 	cin>>t;
-	int n=1000000007;
 	for(int i=0;i<t;i++){
-		int a,b;
-		cin>>a>>b;
-		int ans = expo(a,b,n);
-		//ans=ans%n;
-		cout<<ans<<'\n';
-		
+		int n;
+		cin>>n;
+		vector <int> v(n);
+		for(int i=0;i<n;i++){
+			cin>>v[i];
+		}
+		int sum = max(v[0],v[n-1]);
+		int m = v[0];
+		for(int i=0;i<n-1;i++){
+			sum+=max(v[i],v[i+1]);
+			if(v[i+1]>m){
+				m=v[i+1];
+			}
+		}
+		sum-=m;
+		cout<<sum<<'\n';
 	}
 }
