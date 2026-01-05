@@ -18,12 +18,18 @@ int32_t main() {
     int t = 1;
     cin >> t;
     for (int tt = 1; tt <= t; tt++) {
-        int x;
-        cin>>x;
-        int sum = 0;
-        int a = x/10;
-        int b = x%10;
-        sum = a+b;
-        cout<<sum<<'\n';
+        string s;
+        cin>>s;
+        int c=0;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='Y'){
+                c++;
+            }
+        }
+        if(c>=2){
+            cout<<"NO"<<'\n';
+        } else{
+            cout<<"YES"<<'\n';
+        }
     }
 }
