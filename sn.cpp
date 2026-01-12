@@ -19,41 +19,17 @@ int32_t main() {
     cin >> t;
 
     for (int tt = 1; tt <= t; tt++) {
-        string a;
-        string b;
-        cin>>a>>b;
-        int l;
-        int s;
-        vector <int> v;
-        int c=0;
-        int sum = a.length()+b.length();
-        for(int i=0;i<b.length();i++){
-            int count = 0;
-            int p = i;
-            for(int j=0;j<a.length();j++){
-                if(b[p]==a[j]){
-                    p++;
-                    count++;
-                }
-            }
-            v.push_back(count);
+        long long s,k,m;
+        cin>>s>>k>>m;
+        if(s>k){
+            s=k;
         }
-        // while(c<b.length()){
-        //     int count = 0;
-        //     if(b[p]==a[i]){
-        //         p++;
-        //         count++;
-        //     }
-        //     v.push_back(count);
-        //     p++;
-        // }
-        sort(v.begin(),v.end());
-        int d = v[v.size()-1];
-        
-        //cout<<sum<<count;
-        int ans = sum-d;
-        cout<<ans<<'\n';
-
+        long long x = m/k;
+        if(m>=(x*k+s)){
+            cout<<0<<'\n';
+        } else{
+            cout<<(x*k+s)-m<<'\n';
+        }
 
     }
 }
