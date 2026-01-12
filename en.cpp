@@ -18,20 +18,50 @@ int32_t main() {
     int t = 1;
     cin >> t;
     for (int tt = 1; tt <= t; tt++) {
-        int m;
-        int mid;
-        vector <int> x;
-        for(int i=0;i<3;i++){
-            cin>>m;
-            x.push_back(m);
+        int n,k;
+        cin>>n>>k;
+        if(n==k){
+            cout<<0<<'\n';
+            continue;
         }
-        sort(x.begin(),x.end());
-        int temp = x[1];
-        int sum=0;
-        for(int i=0;i<3;i++){
-            sum+=abs(x[i]-temp);
+        int f = 0;
+        int count=0;
+        while(n>1){
+            int b=0;  
+            if(n%2!=0){
+                b=n/2;
+                n=n-b;
+                if(n==k||b==k){
+                    f=1;
+                    count++;
+                    break;
+                }
+                if(n%2==0){
+                    n=b;
+                }
+               // cout<<n<<' '<<b<<"odd"<<'\n';
+                //cout<<n<<' '<<b<<' ';
+            } else{
+                n=n/2;
+                if(n==k){
+                    f=1;
+
+                    count++;
+
+                    break;
+                }
+                    //cout<<n<<' '<<n<<"even"<<'\n';
+            }
+
+            count++;
+
         }
-        cout<<sum<<'\n';
+        if(f==1){
+            cout<<count<<'\n';
+        } else{
+            cout<<-1<<'\n';
+        }
+
 
     }
 }
