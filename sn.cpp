@@ -21,8 +21,11 @@ int32_t main() {
     for (int tt = 1; tt <= t; tt++) {
         long long s,k,m;
         cin>>s>>k>>m;
+        int f = 0;
         if(s>k){
-            s=k;
+            if(m/k%2!=0){
+                s=k;
+            }
         }
         long long x = m/k;
         if(m>=(x*k+s)){
