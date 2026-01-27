@@ -19,14 +19,34 @@ int32_t main() {
     cin >> t;
 
     for (int tt = 1; tt <= t; tt++) {
-        int n;
+         int n;
         cin>>n;
-        int x = 1;
-        for(int i = 0;i<n;i++){
-            cout<<x<<' ';
-            x++;
+        vector<int> v(n);
+        string s;
+        cin>>s;
+        for(int i=0;i<n;i++){
+            int a=s[i]-'0';
+            v[i]=a;
         }
-        cout<<'\n';
-        
+        sort(v.begin(),v.end());
+        int count = 0;
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            int a=s[i]-'0';
+            if(a!=v[i]){
+                count++;
+                ans.push_back(i+1);
+            }
+        }
+        if(count==0){
+            cout<<"Bob"<<'\n';
+        } else{
+
+            cout<<"Alice"<<'\n'<<count<<'\n';
+            for(int i=0;i<ans.size();i++){
+                cout<<ans[i]<<' ';
+            }
+            cout<<'\n';
+        }
     }
 }
