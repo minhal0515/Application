@@ -10,30 +10,23 @@ using namespace std;
 #define int long long
  
 void solve([[maybe_unused]] int test) {
-    int n;
-cin>>n;
-    vector <int> v(n);
-    vector <int> b(n);
-
+    int n,x,y;
+    cin>>n>>x>>y;
+    vector <int> a(n);
     for(int i=0;i<n;i++){
-        cin>>v[i];
-        b[i]=v[i];
+        cin>>a[i];
     }
-    int k=INT_MAX;
-    sort(b.begin(),b.end());
-    int count=0;
+    int sum=0;
     for(int i=0;i<n;i++){
-        if(v[i]!=b[i]){
-            count++;
-            k=min(k,max(v[i]-b[0], b[n-1]-v[i]));
+        sum+=(a[i]/x)*y;
+    }
+    int ans=0;
+    for(int i=0;i<n;i++){
+        if(a[i]+sum-((a[i]/x)*y)>ans){
+            ans=a[i]+sum-((a[i]/x)*y);
         }
     }
-    if(count==0){
-        cout<<-1<<'\n';
-        return;
-    }
-    cout<<k<<'\n';
-
+    cout<<ans<<'\n';
 }
  
 int32_t main() {
