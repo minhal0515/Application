@@ -14,18 +14,35 @@ int32_t main() {
     int t = 1;
     cin >> t;
     for (int tt = 1; tt <= t; tt++) {
-        int n,x;
+        int n;
         cin>>n;
         vector <int> v(n);
         for(int i=0;i<n;i++){
             cin>>v[i];
         }
-        int count =0;
-        for(int i=0;i<n-1;i++){
-            if(abs(v[i]-v[i+1])==__gcd(v[i],v[i+1])){
-                count++;
-            }
+        sort(v.begin(),v.end());
+        int m=0;
+        int x=0;
+        for(int i=0;i<n;i++){
+            if(v[i]==m){
+                m++;
+                x=i;
+            } 
         }
-        cout<<count<<'\n';
+        int sum;
+        if(m==0){
+            sum=v[n-1];
+        }else{
+            sum=1;
+        }
+        int c=2;
+        while(c<=m){
+            sum+=(c+c-1);
+            c++;
+        }
+        int u=((n-1)*(v[n-1]+m))+v[n-1];
+        sum+=(n-x-1)*(v[n-1]+m);
+        sum=max(sum,u);
+        cout<<sum<<'\n';
     }
 }
