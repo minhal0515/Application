@@ -14,22 +14,22 @@ int32_t main() {
    // cin >> t;
     for (int tt = 1; tt <= t; tt++) {
         int n,x;
-        cin>>n>>x;
-        vector <int> v(n);
-        for(int i=0;i<n;i++){
-            cin>>v[i];
-        }
-        vector <int> dp(x+1);
-        dp[0]=1;
-        for(int i=1;i<=x;i++){
-            for(int j=0;j<n;j++){
-                if(v[j]>i){
-                    continue;
-                }
-                dp[i]=(dp[i]+dp[i-v[j]])%1000000007;
+        cin>>n;
+        // vector <int> v(n);
+        // for(int i=0;i<n;i++){
+        //     cin>>v[i];
+        // }
+        vector <int> dp(n+1,1e9);
+        dp[0]=0;
+        for(int i=1;i<=n;i++){
+            int temp=i;
+            while(temp){
+                int d=temp%10;
+                dp[i]=min(dp[i],1+dp[i-d]);
+                temp=temp/10;
             }
         }
-        int ans=dp[x];
+        int ans=dp[n];
         cout<<ans<<'\n';
     }
 }
