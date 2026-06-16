@@ -9,27 +9,38 @@
 using namespace std;
 #define int long long
  
+ 
 int32_t main() {
     int t = 1;
-   // cin >> t;
+    cin >> t;
     for (int tt = 1; tt <= t; tt++) {
-        int n,x;
-        cin>>n;
-        // vector <int> v(n);
-        // for(int i=0;i<n;i++){
-        //     cin>>v[i];
-        // }
-        vector <int> dp(n+1,1e9);
-        dp[0]=0;
-        for(int i=1;i<=n;i++){
-            int temp=i;
-            while(temp){
-                int d=temp%10;
-                dp[i]=min(dp[i],1+dp[i-d]);
-                temp=temp/10;
+        int a,b,x;
+        cin>>a>>b>>x;
+        vector <int> a1;
+        vector<int> b1;
+        int xx=a;
+        while(xx>0){
+
+            a1.push_back(xx);
+            xx=xx/x;
+        }
+        a1.push_back(0);
+        int yy=b;
+        while(yy>0){
+            //yy=yy/x;
+            b1.push_back(yy);
+            yy=yy/x;
+        }
+        b1.push_back(0);
+        int ans=INT_MAX;
+        for(int i=0;i<a1.size();i++){
+            for(int j=0;j<b1.size();j++){
+                int c=i+j+abs(a1[i]-b1[j]);
+                if(c<ans){
+                    ans=c;
+                }
             }
         }
-        int ans=dp[n];
         cout<<ans<<'\n';
     }
 }
