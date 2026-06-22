@@ -11,23 +11,24 @@ using namespace std;
  
 void solve([[maybe_unused]] int test) {
     int n;
-   // cin>>n;
-    int p,q;
-    cin>>p>>q;
-    // if((p/2==q/3)&&(p%2==0&&q%3==0)&&p>1){
-    //     cout<<"Bob"<<'\n';
-    // }
-    int dif = q-p;
-    if(dif<=0){
-        cout<<"Alice"<<'\n';
-        return;
+    cin>>n;
+    vector <int> v(n);
+    for(int i=0;i<n;i++){
+        cin>>v[i];
     }
-    if(p>=2*dif){
-        cout<<"Bob"<<'\n';
-    } else{
-        cout<<"Alice"<<'\n';
+    int m=0;
+    for(int i=0;i<n-1;i++){
+        if(v[i]>m){
+            m=v[i];
+        }
+        if(v[i+1]<v[i]){
+            v[i+1]=v[i]+v[i+1];
+        }
     }
-
+    if(v[n-1]>m){
+        m=v[n-1];
+    }
+    cout<<m<<'\n';
 }
  
 int32_t main() {
