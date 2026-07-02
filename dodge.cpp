@@ -11,27 +11,37 @@ using namespace std;
 const int m=1e9+7;
 const int tmi=500000004;
 
-int ts(int s, int e){
-    return((((e-s+1)%m)*((s+e)%m)%m)*tmi%m);
-}
  
 void solve([[maybe_unused]] int test) {
     int n;
     cin>>n;
-    int t=0;
-    int at=1;
-    while(at<=n){
-        int a1=n/at;
-        int ls=n/a1;
-        t=(t+a1*ts(at,ls))%m;
-        at=ls+1;
+    int s=0;
+    int ans=0;
+    vector <int> a(n+1);
+    for(int i=1;i<=n;i++){
+        cin>>a[i];
+        s^=a[i];
     }
-    cout<<t<<'\n';
+    if(n==1){
+        cout<<0<<'\n';
+        return;
+    }
+    if(!s){
+        cout<<1<<'\n';
+        return;
+    }
+    for(int i=1;i<=n;i++){
+        if((s^a[i])<a[i]){
+            ans++;
+        }
+    }
+    ans%=998244353;
+    cout<<ans<<'\n';
 }
  
 int32_t main() {
     int t = 1;
-   // cin >> t;
+    cin >> t;
     for (int tt = 1; tt <= t; tt++) {
         solve(tt);
     }
