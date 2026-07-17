@@ -8,49 +8,35 @@
  
 using namespace std;
 #define int long long
+int gcd(int a,int b) {
+    return (b==0)?a:gcd(b,a%b);
+}
  
 int32_t main() {
     int t = 1;
-    //cin >> t;
+    cin >> t;
     for (int tt = 1; tt <= t; tt++) {
-        int n;
-        long long x;
-        cin>>n>>x;
-        vector<int> v(n);
+        int n,m;
+        cin>>n>>m;
+        vector<int> a(n);
+        vector<int> b(m);
         for(int i=0;i<n;i++){
-            cin>>v[i];
+            cin>>a[i];
         }
-        vector<long long> l;
-        vector<long long> r;
-        int mid=n/2;
-        for(int i=0;i<(1<<mid);i++){
-            long long s=0;
-            for(int j=0;j<mid;j++){
-                if(i&(1<<j)){
-                    s+=v[j];
-                }
-            }
-            l.push_back(s);
+        for(int i=0;i<m;i++){
+            cin>>b[i];
         }
-        int rr=n-mid;
-        for(int i=0;i<(1<<rr);i++){
-            long long s=0;
-            for(int j=0;j<rr;j++){
-                if(i&(1<<j)){
-                    s+=v[mid+j];
-                }
-            }
-            r.push_back(s);
+        b.push_back(0);
+        sort(b.begin(), b.end());
+        vector<int> p(n+1);
+        for(int i=0;i<n;i++){
+            p[i+1]=p[i]+a[i];
         }
-        long long c=0;
-        sort(l.begin(),l.end());
-        sort(r.begin(),r.end());
-        for(int i:l){
-            auto li=lower_bound(r.begin(),r.end(),x-i);
-            auto hi=upper_bound(r.begin(),r.end(),x-i);
-            c+=hi-li;   
+        int ans=0;
+        for(int i=1;i<b.size();i++){
+            ans+=abs(p[b[i]]-p[b[i-1]]);
         }
-        cout<<c<<'\n';
-
+        ans+=p[n]-p[b.back()];
+        cout<<ans<<'\n';
     }
 }
