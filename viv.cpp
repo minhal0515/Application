@@ -16,27 +16,39 @@ int32_t main() {
     int t = 1;
     cin >> t;
     for (int tt = 1; tt <= t; tt++) {
-        int n,m;
-        cin>>n>>m;
+        int n;
+        cin>>n;
         vector<int> a(n);
-        vector<int> b(m);
+        vector<int> b(n);
+        int s1=0;
+        int s2=0;
         for(int i=0;i<n;i++){
             cin>>a[i];
+            s1+=a[i];
         }
-        for(int i=0;i<m;i++){
-            cin>>b[i];
-        }
-        b.push_back(0);
-        sort(b.begin(), b.end());
-        vector<int> p(n+1);
         for(int i=0;i<n;i++){
-            p[i+1]=p[i]+a[i];
+            cin>>b[i];
+            s2+=b[i];
         }
-        int ans=0;
-        for(int i=1;i<b.size();i++){
-            ans+=abs(p[b[i]]-p[b[i-1]]);
+        if(a==b){
+            cout<<0<<'\n';
+            continue;
         }
-        ans+=p[n]-p[b.back()];
-        cout<<ans<<'\n';
+        int sum=0;
+        for(int i=0;i<n;i++){
+            if(a[i]!=b[i]){
+                sum+=a[i];
+            }
+        }
+        if(s1==0||s2==n){
+            cout<<-1<<'\n';
+            continue;
+        }
+        if(sum%2==1){
+            cout<<1<<'\n';
+        }
+        else{
+            cout<<2<<'\n';
+        }
     }
 }
