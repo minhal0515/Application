@@ -14,41 +14,36 @@ int gcd(int a,int b) {
  
 int32_t main() {
     int t = 1;
-    cin >> t;
+    //cin >> t;
     for (int tt = 1; tt <= t; tt++) {
         int n;
         cin>>n;
-        vector<int> a(n);
-        vector<int> b(n);
-        int s1=0;
-        int s2=0;
+        vector<string> g(n);
         for(int i=0;i<n;i++){
-            cin>>a[i];
-            s1+=a[i];
+            cin>>g[i];
+        }
+        vector<vector<int>> dp(n, vector<int>(n,0));
+        for(int i=0;i<n;i++){
+            if(g[i][0]=='*'){
+                break;
+            }
+            dp[i][0]=1;
         }
         for(int i=0;i<n;i++){
-            cin>>b[i];
-            s2+=b[i];
+            if(g[0][i]=='*'){
+                break;
+            }
+            dp[0][i]=1;
         }
-        if(a==b){
-            cout<<0<<'\n';
-            continue;
-        }
-        int sum=0;
-        for(int i=0;i<n;i++){
-            if(a[i]!=b[i]){
-                sum+=a[i];
+        for(int i=1;i<n;i++){
+            for(int j=1;j<n;j++){
+                if(g[i][j]=='*'){
+                    continue;
+                }
+                dp[i][j]=(dp[i-1][j]+dp[i][j-1])%1000000007;
             }
         }
-        if(s1==0||s2==n){
-            cout<<-1<<'\n';
-            continue;
-        }
-        if(sum%2==1){
-            cout<<1<<'\n';
-        }
-        else{
-            cout<<2<<'\n';
-        }
+        cout<<dp[n-1][n-1]<<'\n';
+        
     }
 }
